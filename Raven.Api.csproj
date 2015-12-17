@@ -24,6 +24,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -100,6 +101,8 @@
   <ItemGroup>
     <Compile Include="ApiShapesBase.cs" />
     <Compile Include="DesignerToolsShapes.cs" />
+    <Compile Include="Routes.cs" />
+    <Compile Include="Services\IAsyncTemplateProvider.cs" />
     <Compile Include="TagsShapes.cs" />
     <Compile Include="TaxonomyShapes.cs" />
     <Compile Include="MediaShapes.cs" />

@@ -9,10 +9,12 @@ using Orchard.Localization;
 using Orchard.Mvc;
 using Orchard.Mvc.Html;
 using Orchard.UI.Resources;
+using Raven.Api.Services;
 using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
+using System.Linq;
 
 // ReSharper disable InconsistentNaming
 
@@ -23,19 +25,22 @@ namespace Raven.Api {
         private readonly Work<IHttpContextAccessor> _httpContextAccessor;
         private readonly Work<IShapeFactory> _shapeFactory;
         private readonly Work<IContentManager> _contentManager;
+        private readonly Work<IEnumerable<IAsyncTemplateProvider>> _templateProviders;
 
         public CoreShapes(
             Work<WorkContext> workContext,
             Work<IResourceManager> resourceManager,
             Work<IHttpContextAccessor> httpContextAccessor,
             Work<IShapeFactory> shapeFactory,
-            Work<IContentManager> contentManager
+            Work<IContentManager> contentManager,
+            Work<IEnumerable<IAsyncTemplateProvider>> templateProviders
             ) {
             _workContext = workContext;
             _resourceManager = resourceManager;
             _httpContextAccessor = httpContextAccessor;
             _shapeFactory = shapeFactory;
             _contentManager = contentManager;
+            _templateProviders = templateProviders;
 
             T = NullLocalizer.Instance;
         }
@@ -49,9 +54,19 @@ namespace Raven.Api {
         [Shape(BindingAction.Translate)]
         public void Content(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.Node("Content")) {
-                if (Shape.Meta != null) {
-                    Display(Shape.Meta);
+
+                    Display.ViewDataContainer.Model.ContentType = Shape.ContentItem.ContentType;
+                    Display.ViewDataContainer.Model.DisplayType = Shape.Metadata.DisplayType;
+
+                if (_templateProviders.Value.Any()) {
+                    Display.ViewDataContainer.Model.TemplateUrl = _templateProviders.Value.First().GetTemplateUrl(_workContext.Value.HttpContext.Request.RequestContext, Shape.ContentItem.ContentType, Shape.Metadata.DisplayType);
                 }
+
+                    if (Shape.Meta != null)
+                    {
+                        Display(Shape.Meta);
+                    }
+         
 
                 Display(Shape.Header);
                 Display(Shape.Content);
@@ -129,10 +144,13 @@ namespace Raven.Api {
                 DisplayUrl = urlHelper.ItemDisplayUrl((IContent)Shape.ContentPart.ContentItem);
             }
 
-            Display.ViewDataContainer.Model.Id = Shape.ContentPart.Id;
-            Display.ViewDataContainer.Model.DisplayUrl = DisplayUrl;
-            Display.ViewDataContainer.Model.CreatedUtc = Shape.ContentPart.CreatedUtc;
-            Display.ViewDataContainer.Model.PublishedUtc = Shape.ContentPart.PublishedUtc;
+            using (Display.ViewDataContainer.Model.Node("Metadata"))
+            {
+                Display.ViewDataContainer.Model.Id = Shape.ContentPart.Id;
+                Display.ViewDataContainer.Model.DisplayUrl = DisplayUrl;
+                Display.ViewDataContainer.Model.CreatedUtc = Shape.ContentPart.CreatedUtc;
+            }
+
         }
 
         [Shape(BindingAction.Translate)]
@@ -144,30 +162,45 @@ namespace Raven.Api {
                 DisplayUrl = urlHelper.ItemDisplayUrl((IContent)Shape.ContentPart.ContentItem);
             }
 
-            Display.ViewDataContainer.Model.Id = Shape.ContentPart.Id;
-            Display.ViewDataContainer.Model.DisplayUrl = DisplayUrl;
-            Display.ViewDataContainer.Model.CreatedUtc = Shape.ContentPart.CreatedUtc;
-            Display.ViewDataContainer.Model.PublishedUtc = Shape.ContentPart.PublishedUtc;
+            using (Display.ViewDataContainer.Model.Node("Metadata"))
+            {
+                Display.ViewDataContainer.Model.Id = Shape.ContentPart.Id;
+                Display.ViewDataContainer.Model.DisplayUrl = DisplayUrl;
+                Display.ViewDataContainer.Model.CreatedUtc = Shape.ContentPart.CreatedUtc;
+                Display.ViewDataContainer.Model.PublishedUtc = Shape.ContentPart.PublishedUtc;
+            }
         }
 
         [Shape(BindingAction.Translate)]
         public void Parts_Title(dynamic Display, dynamic Shape) {
-            Display.ViewDataContainer.Model.Title = Shape.Title;
+            using (Display.ViewDataContainer.Model.Node("TitlePart"))
+            {
+                Display.ViewDataContainer.Model.Title = Shape.Title;
+            }
         }
 
         [Shape(BindingAction.Translate)]
         public void Parts_Title_Summary(dynamic Display, dynamic Shape) {
-            Display.ViewDataContainer.Model.Title = Shape.Title;
+            using (Display.ViewDataContainer.Model.Node("TitlePart"))
+            {
+                Display.ViewDataContainer.Model.Title = Shape.Title;
+            }
         }
 
         [Shape(BindingAction.Translate)]
         public void Parts_Common_Body(dynamic Display, dynamic Shape) {
-            Display.ViewDataContainer.Model.Body = Shape.Html.ToString();
+            using (Display.ViewDataContainer.Model.Node("BodyPart"))
+            {
+                Display.ViewDataContainer.Model.Html = Shape.Html.ToString();
+            }
         }
 
         [Shape(BindingAction.Translate)]
         public void Parts_Common_Body_Summary(dynamic Display, dynamic Shape) {
-            Display.ViewDataContainer.Model.Body = Shape.Html.ToString();
+            using (Display.ViewDataContainer.Model.Node("BodyPart"))
+            {
+                Display.ViewDataContainer.Model.Body = Shape.Html.ToString();
+            }
         }
 
 

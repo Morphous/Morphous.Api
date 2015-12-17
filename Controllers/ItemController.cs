@@ -40,7 +40,7 @@ namespace Raven.Api.Controllers {
         }
 
         // GET api/<controller>/5
-        public IHttpActionResult Get(int id) {
+        public IHttpActionResult Get(string displayType, int id) {
 
             var contentItem = _contentManager.Get(id, VersionOptions.Published);
 
@@ -51,7 +51,7 @@ namespace Raven.Api.Controllers {
                 return new NotFoundWithMessageResult(T("Cannot view content").ToString());
             }
 
-            var model = _contentManager.BuildDisplay(contentItem, "Detail");
+            var model = _contentManager.BuildDisplay(contentItem, displayType);
             var vm = _serializer.Display(model);
 
             return Ok(vm);
