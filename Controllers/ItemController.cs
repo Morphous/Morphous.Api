@@ -15,6 +15,7 @@ using System.Web.Http;
 using Raven.Api.DisplayManagement;
 
 namespace Raven.Api.Controllers {
+    [CamelCaseController]
     public class ItemController : ApiController {
 
         private readonly IContentManager _contentManager;
