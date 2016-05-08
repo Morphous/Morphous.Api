@@ -54,7 +54,7 @@ namespace Raven.Api {
             var tagsHtml = new List<IHtmlString>();
             UrlHelper urlHelper = new UrlHelper(Display.ViewContext.RequestContext);
 
-            using (Display.ViewDataContainer.Model.List("Tags")) {
+            using (Display.ViewDataContainer.Model.List("TagsPart")) {
 
                 foreach (var t in Shape.Tags) {
 

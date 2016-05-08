@@ -149,6 +149,7 @@ namespace Raven.Api {
                 Display.ViewDataContainer.Model.Id = Shape.ContentPart.Id;
                 Display.ViewDataContainer.Model.DisplayUrl = DisplayUrl;
                 Display.ViewDataContainer.Model.CreatedUtc = Shape.ContentPart.CreatedUtc;
+                Display.ViewDataContainer.Model.PublishedUtc = Shape.ContentPart.PublishedUtc;
             }
 
         }
