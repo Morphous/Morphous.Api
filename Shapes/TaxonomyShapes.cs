@@ -15,9 +15,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Linq;
 
-// ReSharper disable InconsistentNaming
-
-namespace Raven.Api {
+namespace Raven.Api.Shapes {
     public class TaxonomyShapes : ApiShapesBase, IShapeTableProvider {
 
         private readonly Work<WorkContext> _workContext;

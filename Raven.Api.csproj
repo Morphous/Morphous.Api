@@ -105,16 +105,17 @@
   <ItemGroup>
     <Compile Include="ApiShapesBase.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="DesignerToolsShapes.cs" />
+    <Compile Include="Shapes\DesignerToolsShapes.cs" />
     <Compile Include="Filters\CamelCaseControllerAttribute.cs" />
     <Compile Include="Routes.cs" />
+    <Compile Include="Services\AcceptHeaderAlternatesFactory.cs" />
     <Compile Include="Services\IAsyncTemplateProvider.cs" />
-    <Compile Include="TagsShapes.cs" />
-    <Compile Include="TaxonomyShapes.cs" />
+    <Compile Include="Shapes\TagsShapes.cs" />
+    <Compile Include="Shapes\TaxonomyShapes.cs" />
     <Compile Include="MediaShapes.cs" />
-    <Compile Include="FieldShapes.cs" />
+    <Compile Include="Shapes\FieldShapes.cs" />
     <Compile Include="Controllers\ItemController.cs" />
-    <Compile Include="CoreShapes.cs" />
+    <Compile Include="Shapes\CoreShapes.cs" />
     <Compile Include="IShapeTranslate.cs" />
     <Compile Include="ShapeTranslate.cs" />
     <Compile Include="ViewModels\ViewModelBuilder.cs" />
@@ -156,7 +157,7 @@
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>True</UseCustomServer>
+          <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>

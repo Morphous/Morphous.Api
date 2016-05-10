@@ -16,9 +16,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Linq;
 
-// ReSharper disable InconsistentNaming
-
-namespace Raven.Api {
+namespace Raven.Api.Shapes {
     public class CoreShapes : ApiShapesBase, IShapeTableProvider {
         private readonly Work<WorkContext> _workContext;
         private readonly Work<IResourceManager> _resourceManager;
@@ -137,46 +135,48 @@ namespace Raven.Api {
 
         [Shape(BindingAction.Translate)]
         public void Parts_Common_Metadata(dynamic Display, dynamic Shape) {
-            string DisplayUrl = null;
-            if (((IContent)Shape.ContentPart).Is<IAliasAspect>()) {
-                UrlHelper urlHelper = new UrlHelper(Display.ViewContext.RequestContext);
-
-                DisplayUrl = urlHelper.ItemDisplayUrl((IContent)Shape.ContentPart.ContentItem);
-            }
-
+            
             using (Display.ViewDataContainer.Model.Node("Metadata"))
             {
-                Display.ViewDataContainer.Model.Id = Shape.ContentPart.Id;
-                Display.ViewDataContainer.Model.DisplayUrl = DisplayUrl;
-                Display.ViewDataContainer.Model.CreatedUtc = Shape.ContentPart.CreatedUtc;
-                Display.ViewDataContainer.Model.PublishedUtc = Shape.ContentPart.PublishedUtc;
+                Parts_Common_Metadata__api__Flat(Display, Shape);
             }
 
         }
 
         [Shape(BindingAction.Translate)]
         public void Parts_Common_Metadata_Summary(dynamic Display, dynamic Shape) {
+            Parts_Common_Metadata(Display, Shape);
+        }
+
+        [Shape(BindingAction.Translate)]
+        public void Parts_Common_Metadata__api__Flat(dynamic Display, dynamic Shape)
+        {
             string DisplayUrl = null;
-            if (((IContent)Shape.ContentPart).Is<IAliasAspect>()) {
+            if (((IContent)Shape.ContentPart).Is<IAliasAspect>())
+            {
                 UrlHelper urlHelper = new UrlHelper(Display.ViewContext.RequestContext);
 
                 DisplayUrl = urlHelper.ItemDisplayUrl((IContent)Shape.ContentPart.ContentItem);
             }
 
-            using (Display.ViewDataContainer.Model.Node("Metadata"))
-            {
-                Display.ViewDataContainer.Model.Id = Shape.ContentPart.Id;
-                Display.ViewDataContainer.Model.DisplayUrl = DisplayUrl;
-                Display.ViewDataContainer.Model.CreatedUtc = Shape.ContentPart.CreatedUtc;
-                Display.ViewDataContainer.Model.PublishedUtc = Shape.ContentPart.PublishedUtc;
-            }
+            Display.ViewDataContainer.Model.Id = Shape.ContentPart.Id;
+            Display.ViewDataContainer.Model.DisplayUrl = DisplayUrl;
+            Display.ViewDataContainer.Model.CreatedUtc = Shape.ContentPart.CreatedUtc;
+            Display.ViewDataContainer.Model.PublishedUtc = Shape.ContentPart.PublishedUtc;
+        }
+
+        [Shape(BindingAction.Translate)]
+        public void Parts_Common_Metadata_Summary__api__Flat(dynamic Display, dynamic Shape)
+        {
+            Parts_Common_Metadata__api__Flat(Display, Shape);
         }
 
         [Shape(BindingAction.Translate)]
         public void Parts_Title(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.Node("TitlePart"))
             {
-                Display.ViewDataContainer.Model.Title = Shape.Title;
+                Parts_Title_Summary__api__Flat(Display, Shape);
+              //  Display.ViewDataContainer.Model.Title = Shape.Title;
             }
         }
 
@@ -184,8 +184,20 @@ namespace Raven.Api {
         public void Parts_Title_Summary(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.Node("TitlePart"))
             {
-                Display.ViewDataContainer.Model.Title = Shape.Title;
+                Parts_Title_Summary__api__Flat(Display, Shape);
             }
+        }
+
+        [Shape(BindingAction.Translate)]
+        public void Parts_Title__api__Flat(dynamic Display, dynamic Shape)
+        {
+                Display.ViewDataContainer.Model.Title = Shape.Title;
+        }
+
+        [Shape(BindingAction.Translate)]
+        public void Parts_Title_Summary__api__Flat(dynamic Display, dynamic Shape)
+        {
+            Display.ViewDataContainer.Model.Title = Shape.Title;
         }
 
         [Shape(BindingAction.Translate)]
@@ -200,10 +212,21 @@ namespace Raven.Api {
         public void Parts_Common_Body_Summary(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.Node("BodyPart"))
             {
-                Display.ViewDataContainer.Model.Body = Shape.Html.ToString();
+                Display.ViewDataContainer.Model.Html = Shape.Html.ToString();
             }
         }
 
+        [Shape(BindingAction.Translate)]
+        public void Parts_Common_Body__api__Flat(dynamic Display, dynamic Shape)
+        {
+            Display.ViewDataContainer.Model.Body = Shape.Html.ToString();
+        }
+
+        [Shape(BindingAction.Translate)]
+        public void Parts_Common_Body_Summary__api__Flat(dynamic Display, dynamic Shape)
+        {
+            Display.ViewDataContainer.Model.Body = Shape.Html.ToString();
+        }
 
         [Shape(BindingAction.Translate)]
         public void Parts_Contents_Publish(dynamic Display, dynamic Shape) {

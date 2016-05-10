@@ -11,9 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-// ReSharper disable InconsistentNaming
-
-namespace Raven.Api {
+namespace Raven.Api.Shapes {
     public class FieldShapes : ApiShapesBase, IShapeTableProvider {
         private readonly Work<WorkContext> _workContext;
         private readonly Work<IResourceManager> _resourceManager;

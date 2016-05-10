@@ -1,24 +1,18 @@
-﻿using Orchard;
+﻿using System.IO;
+
 using Orchard.ContentManagement;
-using Orchard.ContentManagement.Aspects;
 using Orchard.DisplayManagement;
 using Orchard.DisplayManagement.Descriptors;
-using Orchard.DisplayManagement.Shapes;
 using Orchard.Environment;
 using Orchard.Localization;
 using Orchard.Mvc;
-using Orchard.Mvc.Html;
 using Orchard.UI.Resources;
+using Orchard;
+using Orchard.DisplayManagement.Shapes;
 using System;
-using System.Collections.Generic;
-using System.Web;
-using System.Web.Mvc;
-using System.Linq;
 
-// ReSharper disable InconsistentNaming
-
-namespace Raven.Api {
-    public class TagsShapes : ApiShapesBase, IShapeTableProvider {
+namespace Raven.Api.Shapes {
+    public class DesignerToolsShapes : ApiShapesBase, IShapeTableProvider {
 
         private readonly Work<WorkContext> _workContext;
         private readonly Work<IResourceManager> _resourceManager;
@@ -26,7 +20,7 @@ namespace Raven.Api {
         private readonly Work<IShapeFactory> _shapeFactory;
         private readonly Work<IContentManager> _contentManager;
 
-        public TagsShapes(
+        public DesignerToolsShapes(
             Work<WorkContext> workContext,
             Work<IResourceManager> resourceManager,
             Work<IHttpContextAccessor> httpContextAccessor,
@@ -49,22 +43,24 @@ namespace Raven.Api {
         }
 
         [Shape(BindingAction.Translate)]
-        public void Parts_Tags_ShowTags(dynamic Display, dynamic Shape) {
+        public void ShapeTracingWrapper(dynamic Display, dynamic Shape, TextWriter Output) {
+            if (Shape.IgnoreShapeTracer == null || !(bool)Shape.IgnoreShapeTracer) {
+                using (Display.ViewDataContainer.Model.Node(string.Concat(Shape.ShapeId.ToString(), "-", Shape.Metadata.Type))) {
+                    Display.ViewDataContainer.Model.ShapeType = Shape.Metadata.Type;
+                    Display.ViewDataContainer.Model.DisplayType = Shape.Metadata.DisplayType;
+                    Display.ViewDataContainer.Model.Position = Shape.Metadata.Position;
+                    Display.ViewDataContainer.Model.Alternates = Shape.Metadata.Alternates;
+                    Display.ViewDataContainer.Model.Wrappers = Shape.Metadata.Wrappers;
+                    Display.ViewDataContainer.Model.ShapeId = Shape.ShapeId;
 
-            var tagsHtml = new List<IHtmlString>();
-            UrlHelper urlHelper = new UrlHelper(Display.ViewContext.RequestContext);
-
-            using (Display.ViewDataContainer.Model.List("TagsPart")) {
-
-                foreach (var t in Shape.Tags) {
-
-                    using (Display.ViewDataContainer.Model.Node("Tag")) {
-                        Display.ViewDataContainer.Model.Name = t.TagName;
-                        Display.ViewDataContainer.Model.DisplayUrl = urlHelper.Action("Search", "Home", new { area = "Orchard.Tags", tagName = (string)t.TagName });
-                    }
                 }
             }
+
+            Display(Shape.Metadata.ChildContent);
         }
+
+
+     
 
     }
 }
