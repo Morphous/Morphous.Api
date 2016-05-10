@@ -50,6 +50,12 @@ namespace Raven.Api.Shapes {
         }
 
         [Shape(BindingAction.Translate)]
+        public void Fields_Common_Text__api__Flat(dynamic Display, dynamic Shape, TextWriter Output)
+        {
+            Display.ViewDataContainer.Model.Set(Shape.ContentField.Name, Shape.Value.ToString());
+        }
+
+        [Shape(BindingAction.Translate)]
         public void Fields_Input(dynamic Display, dynamic Shape, TextWriter Output) {
             Display.ViewDataContainer.Model.Set(Shape.ContentField.Name, Shape.ContentField.Value);
         }
