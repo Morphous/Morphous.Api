@@ -42,43 +42,86 @@ namespace Raven.Api.Shapes {
         }
 
         [Shape(BindingAction.Translate)]
-        public void Fields_Common_Text(dynamic Display, dynamic Shape, TextWriter Output) {
-            using (Display.ViewDataContainer.Model.Node(Shape.ContentField.Name))
+        public void Fields_Common_Text(dynamic Display, dynamic Shape) {
+            using (Display.ViewDataContainer.Model.Node(Shape))
             {
-                Display.ViewDataContainer.Model.Value = Shape.Value.ToString();
+                Fields_Common_Text__api__Flat(Display, Shape);
             }
         }
 
         [Shape(BindingAction.Translate)]
-        public void Fields_Common_Text__api__Flat(dynamic Display, dynamic Shape, TextWriter Output)
+        public void Fields_Common_Text__api__Flat(dynamic Display, dynamic Shape)
         {
             Display.ViewDataContainer.Model.Set(Shape.ContentField.Name, Shape.Value.ToString());
         }
 
         [Shape(BindingAction.Translate)]
-        public void Fields_Input(dynamic Display, dynamic Shape, TextWriter Output) {
+        public void Fields_Input(dynamic Display, dynamic Shape)
+        {
+            using (Display.ViewDataContainer.Model.Node(Shape))
+            {
+                Fields_Input__api__Flat(Display, Shape);
+            }
+        }
+
+        [Shape(BindingAction.Translate)]
+        public void Fields_Input__api__Flat(dynamic Display, dynamic Shape) {
             Display.ViewDataContainer.Model.Set(Shape.ContentField.Name, Shape.ContentField.Value);
         }
 
-
         [Shape(BindingAction.Translate)]
         public void Fields_Boolean(dynamic Display, dynamic Shape, TextWriter Output) {
+            using (Display.ViewDataContainer.Model.Node(Shape))
+            {
+                Fields_Boolean__api__Flat(Display, Shape);
+            }
+        }
+
+        [Shape(BindingAction.Translate)]
+        public void Fields_Boolean__api__Flat(dynamic Display, dynamic Shape)
+        {
             bool? booleanValue = Shape.ContentField.Value;
             Display.ViewDataContainer.Model.Set(Shape.ContentField.Name, booleanValue.HasValue ? booleanValue.Value : booleanValue);
         }
 
         [Shape(BindingAction.Translate)]
-        public void Fields_DateTime(dynamic Display, dynamic Shape, TextWriter Output) {
+        public void Fields_DateTime(dynamic Display, dynamic Shape) {
+            using (Display.ViewDataContainer.Model.Node(Shape))
+            {
+                Fields_DateTime__api__Flat(Display, Shape);
+            }
+        }
+
+        [Shape(BindingAction.Translate)]
+        public void Fields_DateTime__api__Flat(dynamic Display, dynamic Shape)
+        {
             Display.ViewDataContainer.Model.Set(Shape.ContentField.Name, Shape.ContentField.DateTime);
         }
 
         [Shape(BindingAction.Translate)]
-        public void Fields_Numeric(dynamic Display, dynamic Shape, TextWriter Output) {
+        public void Fields_Numeric(dynamic Display, dynamic Shape) {
+            using (Display.ViewDataContainer.Model.Node(Shape))
+            {
+                Fields_Numeric__api__Flat(Display, Shape);
+            }
+        }
+
+        [Shape(BindingAction.Translate)]
+        public void Fields_Numeric__api__Flat(dynamic Display, dynamic Shape)
+        {
             Display.ViewDataContainer.Model.Set(Shape.ContentField.Name, Shape.ContentField.Value);
         }
 
         [Shape(BindingAction.Translate)]
-        public void Fields_Enumeration(dynamic Display, dynamic Shape, TextWriter Output) {
+        public void Fields_Enumeration(dynamic Display, dynamic Shape){
+            using (Display.ViewDataContainer.Model.Node(Shape))
+            {
+                Fields_Enumeration__api__Flat(Display, Shape);
+            }
+        }
+
+        [Shape(BindingAction.Translate)]
+        public void Fields_Enumeration__api__Flat(dynamic Display, dynamic Shape) {
             string valueToDisplay = string.Empty;
             string[] selectedValues = Shape.ContentField.SelectedValues;
             string[] translatedValues = new string[0];
@@ -91,7 +134,16 @@ namespace Raven.Api.Shapes {
         }
 
         [Shape(BindingAction.Translate)]
-        public void Fields_MediaLibraryPicker(dynamic Display, dynamic Shape, TextWriter Output) {
+        public void Fields_MediaLibraryPicker(dynamic Display, dynamic Shape)
+        {
+            using (Display.ViewDataContainer.Model.Node(Shape))
+            {
+                Fields_MediaLibraryPicker__api__Flat(Display, Shape);
+            }
+        }
+
+        [Shape(BindingAction.Translate)]
+        public void Fields_MediaLibraryPicker__api__Flat(dynamic Display, dynamic Shape) {
             var field = Shape.ContentField;
             string name = field.DisplayName;
             var contents = field.MediaParts;

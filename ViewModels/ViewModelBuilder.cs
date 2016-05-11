@@ -38,6 +38,11 @@ namespace Raven.Api.ViewModels {
             _nodeStack.Push(node);
         }
 
+        public CaptureScope Node(dynamic shape)
+        {
+            return Node(shape.ContentPart.PartDefinition.Name);
+        }
+
         public CaptureScope Node(string name) {
 
             var newNode = new ViewModelNode();
@@ -92,8 +97,11 @@ namespace Raven.Api.ViewModels {
 
             var currentNode = _nodeStack.Peek();
 
-            if (currentNode.GetType() == typeof(List<dynamic>)) {
+            if (currentNode.GetType() == typeof(List<dynamic>)){
                 currentNode.Add(newNode);
+            }
+            else if (currentNode.ContainsKey(name)) {
+                return new CaptureScope(this, currentNode[name]);
             }
             else {
                 _nodeStack.Peek().Add(name, newNode);
