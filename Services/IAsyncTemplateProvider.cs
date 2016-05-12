@@ -10,6 +10,7 @@ namespace Raven.Api.Services
 {
     public interface IAsyncTemplateProvider : IDependency
     {
+        string Identifier { get; }
         string GetTemplateUrl(RequestContext context, string ContentType, string displayType);
     }
 }

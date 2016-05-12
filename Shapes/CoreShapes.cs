@@ -57,7 +57,12 @@ namespace Raven.Api.Shapes {
                     Display.ViewDataContainer.Model.DisplayType = Shape.Metadata.DisplayType;
 
                 if (_templateProviders.Value.Any()) {
-                    Display.ViewDataContainer.Model.TemplateUrl = _templateProviders.Value.First().GetTemplateUrl(_workContext.Value.HttpContext.Request.RequestContext, Shape.ContentItem.ContentType, Shape.Metadata.DisplayType);
+
+                    using (Display.ViewDataContainer.Model.Node("templates")) {
+
+                        _templateProviders.Value.ToList().ForEach(tp => Display.ViewDataContainer.Model.Set(tp.Identifier, tp.GetTemplateUrl(_workContext.Value.HttpContext.Request.RequestContext, Shape.ContentItem.ContentType, Shape.Metadata.DisplayType)));
+
+                    }
                 }
 
                     if (Shape.Meta != null)
