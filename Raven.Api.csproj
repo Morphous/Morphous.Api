@@ -112,7 +112,7 @@
     <Compile Include="Services\IAsyncTemplateProvider.cs" />
     <Compile Include="Shapes\TagsShapes.cs" />
     <Compile Include="Shapes\TaxonomyShapes.cs" />
-    <Compile Include="MediaShapes.cs" />
+    <Compile Include="Shapes\MediaShapes.cs" />
     <Compile Include="Shapes\FieldShapes.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Shapes\CoreShapes.cs" />

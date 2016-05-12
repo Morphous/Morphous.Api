@@ -156,12 +156,11 @@ namespace Raven.Api.Shapes {
             var contents = field.MediaParts;
             var mediaShapes = new List<dynamic>();
 
-            foreach (var item in contents) {
-                mediaShapes.Add(_contentManager.Value.BuildDisplay(item, "Summary"));
+            using (Display.ViewDataContainer.Model.List(Shape.ContentField)) {
+                foreach (var item in contents) {
+                    Display(_contentManager.Value.BuildDisplay(item, "Summary"));
+                }
             }
-           
-            var list = New.List(Name: Shape.ContentField.Name, Items: mediaShapes);
-            Display(list);
         }
 
     }

@@ -39,8 +39,7 @@ namespace Raven.Api.ViewModels {
             _nodeStack.Push(node);
         }
 
-        public CaptureScope Node(ContentPart part)
-        {
+        public CaptureScope Node(ContentPart part) {
             return Node(part.PartDefinition.Name);
         }
 
@@ -49,17 +48,21 @@ namespace Raven.Api.ViewModels {
         }
 
         public CaptureScope Node(string name) {
-
-            var newNode = new ViewModelNode();
+           var newNode = new ViewModelNode();
             return CreateNode(name, newNode);
+        }
 
+        public CaptureScope List(ContentPart part) {
+            return List(part.PartDefinition.Name);
+        }
+
+        public CaptureScope List(ContentField field) {
+            return List(field.Name);
         }
 
         public CaptureScope List(string name) {
-
             var newNode = new List<dynamic>();
             return CreateNode(name, newNode);
-
         }
 
         public void Set(string name, object value) {
