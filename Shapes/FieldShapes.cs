@@ -70,7 +70,7 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void Fields_Input__api__Flat(dynamic Display, dynamic Shape) {
-            Display.ViewDataContainer.Model.Set(Shape.ContentField.Name, Shape.ContentField.Value);
+            Display.ViewDataContainer.Model.Set(Shape.ContentField.Name, Shape.Value);
         }
 
         [Shape(BindingAction.Translate)]
@@ -95,7 +95,9 @@ namespace Raven.Api.Shapes {
         public void Fields_DateTime(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
-                Fields_DateTime__api__Flat(Display, Shape);
+                using (Display.ViewDataContainer.Model.Node(Shape.ContentField)) {
+                    Display.ViewDataContainer.Model.Value = Shape.ContentField.DateTime;
+                }
             }
         }
 
@@ -109,21 +111,34 @@ namespace Raven.Api.Shapes {
         public void Fields_Numeric(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
-                Fields_Numeric__api__Flat(Display, Shape);
+                using (Display.ViewDataContainer.Model.Node(Shape.ContentField)) {
+                    Display.ViewDataContainer.Model.Value = Shape.Value;
+                }
             }
         }
 
         [Shape(BindingAction.Translate)]
         public void Fields_Numeric__api__Flat(dynamic Display, dynamic Shape)
         {
-            Display.ViewDataContainer.Model.Set(Shape.ContentField.Name, Shape.ContentField.Value);
+            Display.ViewDataContainer.Model.Set(Shape.ContentField.Name, Shape.Value);
         }
 
         [Shape(BindingAction.Translate)]
         public void Fields_Enumeration(dynamic Display, dynamic Shape){
+
+            string valueToDisplay = string.Empty;
+            string[] selectedValues = Shape.ContentField.SelectedValues;
+            string[] translatedValues = new string[0];
+            if (selectedValues != null) {
+                string valueFormat = T("{0}").ToString();
+                translatedValues = selectedValues.Select(v => string.Format(valueFormat, T(v).Text)).ToArray();
+            }
+
             using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
-                Fields_Enumeration__api__Flat(Display, Shape);
+                using (Display.ViewDataContainer.Model.Node(Shape.ContentField)) {
+                    Display.ViewDataContainer.Model.Value = translatedValues;
+                }
             }
         }
 
