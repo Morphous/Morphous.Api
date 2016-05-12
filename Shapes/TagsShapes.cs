@@ -49,7 +49,7 @@ namespace Raven.Api.Shapes {
         [Shape(BindingAction.Translate)]
         public void Parts_Tags_ShowTags(dynamic Display, dynamic Shape) {
 
-            using (Display.ViewDataContainer.Model.Node(Shape)) {
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart)) {
                 Parts_Tags_ShowTags__api__Flat(Display, Shape);
             }
         }

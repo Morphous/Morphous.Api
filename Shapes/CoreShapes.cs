@@ -173,7 +173,7 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void Parts_Title(dynamic Display, dynamic Shape) {
-            using (Display.ViewDataContainer.Model.Node(Shape))
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
                 Parts_Title_Summary__api__Flat(Display, Shape);
               //  Display.ViewDataContainer.Model.Title = Shape.Title;
@@ -182,7 +182,7 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void Parts_Title_Summary(dynamic Display, dynamic Shape) {
-            using (Display.ViewDataContainer.Model.Node(Shape))
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
                 Parts_Title_Summary__api__Flat(Display, Shape);
             }
@@ -202,7 +202,7 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void Parts_Common_Body(dynamic Display, dynamic Shape) {
-            using (Display.ViewDataContainer.Model.Node(Shape))
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
                 Display.ViewDataContainer.Model.Html = Shape.Html.ToString();
             }
@@ -210,7 +210,7 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void Parts_Common_Body_Summary(dynamic Display, dynamic Shape) {
-            using (Display.ViewDataContainer.Model.Node(Shape))
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
                 Display.ViewDataContainer.Model.Html = Shape.Html.ToString();
             }

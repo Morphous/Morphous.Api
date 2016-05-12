@@ -43,7 +43,7 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void Fields_Common_Text(dynamic Display, dynamic Shape) {
-            using (Display.ViewDataContainer.Model.Node(Shape))
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
                 Fields_Common_Text__api__Flat(Display, Shape);
             }
@@ -58,7 +58,7 @@ namespace Raven.Api.Shapes {
         [Shape(BindingAction.Translate)]
         public void Fields_Input(dynamic Display, dynamic Shape)
         {
-            using (Display.ViewDataContainer.Model.Node(Shape))
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
                 Fields_Input__api__Flat(Display, Shape);
             }
@@ -71,7 +71,7 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void Fields_Boolean(dynamic Display, dynamic Shape, TextWriter Output) {
-            using (Display.ViewDataContainer.Model.Node(Shape))
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
                 Fields_Boolean__api__Flat(Display, Shape);
             }
@@ -86,7 +86,7 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void Fields_DateTime(dynamic Display, dynamic Shape) {
-            using (Display.ViewDataContainer.Model.Node(Shape))
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
                 Fields_DateTime__api__Flat(Display, Shape);
             }
@@ -100,7 +100,7 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void Fields_Numeric(dynamic Display, dynamic Shape) {
-            using (Display.ViewDataContainer.Model.Node(Shape))
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
                 Fields_Numeric__api__Flat(Display, Shape);
             }
@@ -114,7 +114,7 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void Fields_Enumeration(dynamic Display, dynamic Shape){
-            using (Display.ViewDataContainer.Model.Node(Shape))
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
                 Fields_Enumeration__api__Flat(Display, Shape);
             }
@@ -136,7 +136,7 @@ namespace Raven.Api.Shapes {
         [Shape(BindingAction.Translate)]
         public void Fields_MediaLibraryPicker(dynamic Display, dynamic Shape)
         {
-            using (Display.ViewDataContainer.Model.Node(Shape))
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
                 Fields_MediaLibraryPicker__api__Flat(Display, Shape);
             }

@@ -67,7 +67,7 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void TaxonomyItem(dynamic Display, dynamic Shape) {
-            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart.Name)) {
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart)) {
 
                 Shape.Metadata.Alternates.Clear();
                 Shape.Metadata.Type = "TaxonomyItemLink";

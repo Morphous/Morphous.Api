@@ -1,4 +1,5 @@
-﻿using Orchard.DisplayManagement;
+﻿using Orchard.ContentManagement;
+using Orchard.DisplayManagement;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -38,9 +39,13 @@ namespace Raven.Api.ViewModels {
             _nodeStack.Push(node);
         }
 
-        public CaptureScope Node(dynamic shape)
+        public CaptureScope Node(ContentPart part)
         {
-            return Node(shape.ContentPart.PartDefinition.Name);
+            return Node(part.PartDefinition.Name);
+        }
+
+        public CaptureScope Node(ContentField field) {
+            return Node(field.Name);
         }
 
         public CaptureScope Node(string name) {
