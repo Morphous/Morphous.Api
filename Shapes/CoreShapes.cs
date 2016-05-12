@@ -266,13 +266,6 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void List(dynamic Display, dynamic Shape) {
-            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart)) {
-                List__api__Flat(Display, Shape);
-            }
-        }
-
-        [Shape(BindingAction.Translate)]
-        public void List__api__Flat(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.List(Shape.Name ?? "Items")) {
                 foreach (var item in ((IEnumerable<dynamic>)Shape.Items)) {
                     Display(item);
