@@ -104,6 +104,37 @@ namespace Raven.Api.Shapes {
             // when an anonymous object is bound to an object shape parameter
             /*object RouteValues*/) {
 
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart)) {
+                Pager__api__Flat(Shape, Display,
+                     Page,
+                     PageSize,
+                     TotalItemCount,
+                     Quantity,
+                     FirstText,
+                     PreviousText,
+                     NextText,
+                     LastText,
+                     GapText,
+                     PagerId);
+                                }
+        }
+
+        [Shape(BindingAction.Translate)]
+        public void Pager__api__Flat(dynamic Shape, dynamic Display,
+            int Page,
+            int PageSize,
+            double TotalItemCount,
+            int? Quantity,
+            object FirstText,
+            object PreviousText,
+            object NextText,
+            object LastText,
+            object GapText,
+            string PagerId
+            // parameter omitted to workaround an issue where a NullRef is thrown
+            // when an anonymous object is bound to an object shape parameter
+            /*object RouteValues*/) {
+
             var currentPage = Page;
             if (currentPage < 1)
                 currentPage = 1;
@@ -235,6 +266,13 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void List(dynamic Display, dynamic Shape) {
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart)) {
+                List__api__Flat(Display, Shape);
+            }
+        }
+
+        [Shape(BindingAction.Translate)]
+        public void List__api__Flat(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.List(Shape.Name ?? "Items")) {
                 foreach (var item in ((IEnumerable<dynamic>)Shape.Items)) {
                     Display(item);
@@ -244,6 +282,13 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void Parts_Container_Contained(dynamic Display, dynamic Shape) {
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart)) {
+                Parts_Container_Contained__api__Flat(Display, Shape);
+            }
+        }
+
+        [Shape(BindingAction.Translate)]
+        public void Parts_Container_Contained__api__Flat(dynamic Display, dynamic Shape) {
             Shape.List.Name = "ChildItems";
             Display(Shape.List);
         }
