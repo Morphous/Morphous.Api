@@ -48,7 +48,23 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void Fields_TaxonomyField(dynamic Display, dynamic Shape) {
-            Display.ViewDataContainer.Model.Set(Shape.ContentField.DisplayName, ((IEnumerable<dynamic>)Shape.Terms).Select(t => t.Name));
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart)) {
+                Fields_TaxonomyField__api__Flat(Display, Shape);
+            }
+        }
+
+        [Shape(BindingAction.Translate)]
+        public void Fields_TaxonomyField__api__Flat(dynamic Display, dynamic Shape) {
+            UrlHelper urlHelper = new UrlHelper(Display.ViewContext.RequestContext);
+
+            using (Display.ViewDataContainer.Model.List(Shape.ContentField)) {
+                foreach (var term in (IEnumerable<dynamic>)Shape.Terms) {
+                    using (Display.ViewDataContainer.Model.Node("Item")) {
+                        Display.ViewDataContainer.Model.Name = term.Name;
+                        Display.ViewDataContainer.Model.Url = urlHelper.ItemDisplayUrl((IContent)Shape.ContentPart);
+                    }
+                }
+            }
         }
 
         [Shape(BindingAction.Translate)]
