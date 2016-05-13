@@ -4,9 +4,11 @@ using Orchard.DisplayManagement;
 using Orchard.DisplayManagement.Descriptors;
 using Orchard.DisplayManagement.Shapes;
 using Orchard.Environment;
+using Orchard.Fields.Settings;
 using Orchard.Localization;
 using Orchard.Mvc;
 using Orchard.UI.Resources;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -178,5 +180,45 @@ namespace Raven.Api.Shapes {
             }
         }
 
+        [Shape(BindingAction.Translate)]
+        public void Fields_Link(dynamic Display, dynamic Shape)
+        {
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
+            {
+                Fields_Link__api__Flat(Display, Shape);
+            }
+        }
+
+        [Shape(BindingAction.Translate)]
+        public void Fields_Link__api__Flat(dynamic Display, dynamic Shape)
+        {
+
+            string name = Shape.ContentField.DisplayName;
+            LinkFieldSettings settings = Shape.ContentField.PartFieldDefinition.Settings.GetModel<LinkFieldSettings>();
+            string text = Shape.ContentField.Text;
+            switch (settings.LinkTextMode)
+            {
+                case LinkTextMode.Static:
+                    text = settings.StaticText;
+                    break;
+                case LinkTextMode.Url:
+                    text = Shape.ContentField.Value;
+                    break;
+                case LinkTextMode.Optional:
+                    if (String.IsNullOrWhiteSpace(text))
+                    {
+                        text = Shape.ContentField.Value;
+                    }
+                    break;
+            }
+
+
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentField))
+            {
+                Display.ViewDataContainer.Model.Url = Shape.ContentField.Value;
+                Display.ViewDataContainer.Model.Text = text;
+                Display.ViewDataContainer.Model.Target = Shape.ContentField.Target;
+            }
+        }
     }
 }
