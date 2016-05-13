@@ -109,7 +109,7 @@ namespace Raven.Api.Shapes {
             // when an anonymous object is bound to an object shape parameter
             /*object RouteValues*/) {
 
-            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart)) {
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart ?? Shape.Term)) {
                 Pager__api__Flat(Shape, Display,
                      Page,
                      PageSize,
@@ -163,7 +163,7 @@ namespace Raven.Api.Shapes {
                 Display.ViewDataContainer.Model.PageSize = pageSize;
                 Display.ViewDataContainer.Model.PageKey = pageKey;
 
-                if (Shape.ContentPart != null) {
+                if (Shape.ContentPart != null && Shape.ContentPart.Record.PagerSuffix != null) {
                     Display.ViewDataContainer.Model.PageSizeKey = "pageSize" + Shape.ContentPart.Record.PagerSuffix;
                 }
             }
@@ -271,7 +271,7 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void List(dynamic Display, dynamic Shape) {
-            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart)) {
+            using (Display.ViewDataContainer.Model.Node(Shape.ContentPart ?? "Items")) {
                 List__api__Flat(Display,Shape);
             }
         }

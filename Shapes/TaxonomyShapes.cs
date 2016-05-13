@@ -61,7 +61,7 @@ namespace Raven.Api.Shapes {
                 foreach (var term in (IEnumerable<dynamic>)Shape.Terms) {
                     using (Display.ViewDataContainer.Model.Node("Item")) {
                         Display.ViewDataContainer.Model.Name = term.Name;
-                        Display.ViewDataContainer.Model.Url = urlHelper.ItemDisplayUrl((IContent)Shape.ContentPart);
+                        Display.ViewDataContainer.Model.Url = urlHelper.ItemDisplayUrl((IContent)term);
                     }
                 }
             }
@@ -104,8 +104,13 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void Parts_TermPart(dynamic Display, dynamic Shape) {
+            //this is to ensure the correct wrapping
+            Shape.ContentItems.ContentPart = Shape.ContentPart;
+
             Display(Shape.ContentItems);
             Display(Shape.Pager);
         }
+
+        
     }
 }
