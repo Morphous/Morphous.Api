@@ -13,8 +13,10 @@ using Raven.Api.Services;
 using System;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.Mvc;
 using System.Linq;
+using System.Web.Http.Routing;
+using Raven.Api.Extensions;
+using System.Net.Http;
 
 namespace Raven.Api.Shapes {
     public class CoreShapes : ApiShapesBase, IShapeTableProvider {
@@ -190,13 +192,13 @@ namespace Raven.Api.Shapes {
             string DisplayUrl = null;
             if (((IContent)Shape.ContentPart).Is<IAliasAspect>())
             {
-                UrlHelper urlHelper = new UrlHelper(Display.ViewContext.RequestContext);
+                System.Web.Mvc.UrlHelper urlHelper = new System.Web.Mvc.UrlHelper(Display.ViewContext.RequestContext);
 
-                DisplayUrl = urlHelper.ItemDisplayUrl((IContent)Shape.ContentPart.ContentItem);
+                DisplayUrl = urlHelper.ItemApiGet((IContent)Shape.ContentPart.ContentItem);
             }
 
             Display.ViewDataContainer.Model.Id = Shape.ContentPart.Id;
-            Display.ViewDataContainer.Model.DisplayUrl = DisplayUrl;
+            Display.ViewDataContainer.Model.ResourceUrl = DisplayUrl;
             Display.ViewDataContainer.Model.CreatedUtc = Shape.ContentPart.CreatedUtc;
             Display.ViewDataContainer.Model.PublishedUtc = Shape.ContentPart.PublishedUtc;
         }

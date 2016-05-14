@@ -122,6 +122,7 @@
     <Compile Include="Shapes\CoreShapes.cs" />
     <Compile Include="IShapeTranslate.cs" />
     <Compile Include="ShapeTranslate.cs" />
+    <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="ViewModels\ViewModelBuilder.cs" />
   </ItemGroup>
   <PropertyGroup>

@@ -12,8 +12,10 @@ using Orchard.UI.Resources;
 using System;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.Mvc;
+
 using System.Linq;
+using Raven.Api.Extensions;
+using System.Web.Http.Routing;
 
 namespace Raven.Api.Shapes {
     public class TaxonomyShapes : ApiShapesBase, IShapeTableProvider {
@@ -55,13 +57,14 @@ namespace Raven.Api.Shapes {
 
         [Shape(BindingAction.Translate)]
         public void Fields_TaxonomyField__api__Flat(dynamic Display, dynamic Shape) {
-            UrlHelper urlHelper = new UrlHelper(Display.ViewContext.RequestContext);
+            System.Web.Mvc.UrlHelper urlHelper = new System.Web.Mvc.UrlHelper(Display.ViewContext.RequestContext);
+
 
             using (Display.ViewDataContainer.Model.List(Shape.ContentField)) {
                 foreach (var term in (IEnumerable<dynamic>)Shape.Terms) {
                     using (Display.ViewDataContainer.Model.Node("Item")) {
                         Display.ViewDataContainer.Model.Name = term.Name;
-                        Display.ViewDataContainer.Model.Url = urlHelper.ItemDisplayUrl((IContent)term);
+                        Display.ViewDataContainer.Model.ResourceUrl =  urlHelper.ItemApiGet((IContent)term);
                     }
                 }
             }
@@ -88,10 +91,10 @@ namespace Raven.Api.Shapes {
                 Shape.Metadata.Alternates.Clear();
                 Shape.Metadata.Type = "TaxonomyItemLink";
 
-                UrlHelper urlHelper = new UrlHelper(Display.ViewContext.RequestContext);
+                System.Web.Mvc.UrlHelper urlHelper = new System.Web.Mvc.UrlHelper(Display.ViewContext.RequestContext);
                 Display.ViewDataContainer.Model.Id = Shape.ContentPart.Id;
                 Display.ViewDataContainer.Model.Title = Shape.ContentPart.Name;
-                Display.ViewDataContainer.Model.DisplayUrl = urlHelper.ItemDisplayUrl((IContent)Shape.ContentPart.ContentItem);
+                Display.ViewDataContainer.Model.DisplayUrl = urlHelper.ItemApiGet((IContent)Shape.ContentPart.ContentItem);
 
                 /* render child elements */
                 using (Display.ViewDataContainer.Model.List("Terms")) {

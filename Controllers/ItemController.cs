@@ -41,7 +41,7 @@ namespace Raven.Api.Controllers {
         }
 
         // GET api/<controller>/5
-        public IHttpActionResult Get(string displayType, int id) {
+        public IHttpActionResult Get(int id, string displayType) {
 
             var contentItem = _contentManager.Get(id, VersionOptions.Published);
 

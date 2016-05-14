@@ -1,29 +1,39 @@
 ﻿using System.Collections.Generic;
 using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
 using Orchard.Mvc.Routes;
+using System.Linq;
+using Orchard.WebApi.Routes;
+using System.Web.Http;
 
 namespace Raven.AsyncShapes
 {
-    public class Routes : IRouteProvider
+
+    public class RavenApiHttpRouteProvider : IHttpRouteProvider
     {
-        public void GetRoutes(ICollection<RouteDescriptor> routes)
-        {
+
+        public RavenApiHttpRouteProvider() {
+        }
+
+        public IEnumerable<RouteDescriptor> GetRoutes() {
+
+
+            return new[] {
+                new HttpRouteDescriptor
+                {
+                    Name = "RavenApiItem",
+                    Priority = 100,
+                    RouteTemplate = "api/raven.api/{controller}/{id}/{displayType}",
+                    Defaults = new { area = "Raven.Api", controller = "item", displayType = "Detail" }
+                }
+            };
+
+        }
+
+
+        public void GetRoutes(ICollection<RouteDescriptor> routes) {
             foreach (var routeDescriptor in GetRoutes())
                 routes.Add(routeDescriptor);
         }
-
-        public IEnumerable<RouteDescriptor> GetRoutes()
-        {
-            return new[] {
-                new HttpRouteDescriptor {
-                    Priority = 10,
-                    RouteTemplate = "api/raven.api/{displayType}/{id}",
-                    Defaults = new {area = "Raven.Api", controller = "Item" }
-                }
-        };
-        }
-
     }
+
 }
