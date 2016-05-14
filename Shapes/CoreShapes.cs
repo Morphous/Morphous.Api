@@ -189,16 +189,10 @@ namespace Raven.Api.Shapes {
         [Shape(BindingAction.Translate)]
         public void Parts_Common_Metadata__api__Flat(dynamic Display, dynamic Shape)
         {
-            string DisplayUrl = null;
-            if (((IContent)Shape.ContentPart).Is<IAliasAspect>())
-            {
-                System.Web.Mvc.UrlHelper urlHelper = new System.Web.Mvc.UrlHelper(Display.ViewContext.RequestContext);
-
-                DisplayUrl = urlHelper.ItemApiGet((IContent)Shape.ContentPart.ContentItem);
-            }
+            System.Web.Mvc.UrlHelper urlHelper = new System.Web.Mvc.UrlHelper(Display.ViewContext.RequestContext);
 
             Display.ViewDataContainer.Model.Id = Shape.ContentPart.Id;
-            Display.ViewDataContainer.Model.ResourceUrl = DisplayUrl;
+            Display.ViewDataContainer.Model.ResourceUrl = urlHelper.ItemApiGet((IContent)Shape.ContentPart);
             Display.ViewDataContainer.Model.CreatedUtc = Shape.ContentPart.CreatedUtc;
             Display.ViewDataContainer.Model.PublishedUtc = Shape.ContentPart.PublishedUtc;
         }
