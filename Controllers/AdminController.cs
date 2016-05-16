@@ -18,7 +18,11 @@ using Orchard;
 using Orchard.DisplayManagement;
 using Orchard.Localization;
 using Orchard.Logging;
+using Raven.Api.Extensions;
+
+
 namespace Raven.Api.Controllers {
+    [CamelCaseController]
     public class AdminController : ApiController, IUpdateModel {
         
 
@@ -73,7 +77,7 @@ namespace Raven.Api.Controllers {
 
             _model = viewmodel;
 
-            var contentItem = _contentManager.New("Simpleton");
+            var contentItem = _contentManager.New("TeamMember");
 
             if (!Services.Authorizer.Authorize(Permissions.EditContent, contentItem, T("Couldn't create content")))
                 return Ok();
@@ -84,7 +88,7 @@ namespace Raven.Api.Controllers {
 
             if (!ModelState.IsValid) {
                 _transactionManager.Cancel();
-                return Ok(ModelState);
+                return BadRequest(ModelState);
             }
 
             _contentManager.Publish(contentItem);
@@ -93,7 +97,7 @@ namespace Raven.Api.Controllers {
                 ? T("Your content has been created.")
                 : T("Your {0} has been created.", contentItem.TypeDefinition.DisplayName));
 
-            return Ok(Services.Notifier.List());
+            return Ok(Services.Notifier.List().Select(n => n.Message.Text));
 
             
         }
@@ -109,7 +113,10 @@ namespace Raven.Api.Controllers {
         public bool TryUpdateModel<TModel>(TModel model, string prefix, string[] includeProperties, string[] excludeProperties) where TModel : class {
 
             JToken node = null;
-           // _model.TryGetValue(prefix,out node);
+            // _model.TryGetValue(prefix,out node);
+
+            prefix = string.Join(".", prefix.Split('.').Select(s => s.ToCamelCase()));
+
             node = _model.SelectToken(prefix);
             if(node != null)
             {
@@ -126,7 +133,7 @@ namespace Raven.Api.Controllers {
                     }
 
                     foreach (var prop in props) {
-                        var token = node[prop.Name];
+                        var token = node[prop.Name.ToCamelCase()];
                         if (token != null) {
                             prop.SetValue(model, token.ToObject(prop.PropertyType));
                         }
