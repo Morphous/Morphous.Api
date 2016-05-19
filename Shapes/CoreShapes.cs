@@ -25,22 +25,19 @@ namespace Raven.Api.Shapes {
         private readonly Work<IHttpContextAccessor> _httpContextAccessor;
         private readonly Work<IShapeFactory> _shapeFactory;
         private readonly Work<IContentManager> _contentManager;
-        private readonly Work<IEnumerable<IAsyncTemplateProvider>> _templateProviders;
 
         public CoreShapes(
             Work<WorkContext> workContext,
             Work<IResourceManager> resourceManager,
             Work<IHttpContextAccessor> httpContextAccessor,
             Work<IShapeFactory> shapeFactory,
-            Work<IContentManager> contentManager,
-            Work<IEnumerable<IAsyncTemplateProvider>> templateProviders
+            Work<IContentManager> contentManager
             ) {
             _workContext = workContext;
             _resourceManager = resourceManager;
             _httpContextAccessor = httpContextAccessor;
             _shapeFactory = shapeFactory;
             _contentManager = contentManager;
-            _templateProviders = templateProviders;
 
             T = NullLocalizer.Instance;
         }
@@ -58,14 +55,7 @@ namespace Raven.Api.Shapes {
                     Display.ViewDataContainer.Model.ContentType = Shape.ContentItem.ContentType;
                     Display.ViewDataContainer.Model.DisplayType = Shape.Metadata.DisplayType;
 
-                if (_templateProviders.Value.Any()) {
-
-                    using (Display.ViewDataContainer.Model.Node("templates")) {
-
-                        _templateProviders.Value.ToList().ForEach(tp => Display.ViewDataContainer.Model.Set(tp.Identifier, tp.GetTemplateUrl(_workContext.Value.HttpContext.Request.RequestContext, Shape.ContentItem.ContentType, Shape.Metadata.DisplayType)));
-
-                    }
-                }
+             
 
                     if (Shape.Meta != null)
                     {

@@ -114,7 +114,6 @@
     <Compile Include="Filters\CamelCaseControllerAttribute.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="Services\AcceptHeaderAlternatesFactory.cs" />
-    <Compile Include="Services\IAsyncTemplateProvider.cs" />
     <Compile Include="Shapes\TagsShapes.cs" />
     <Compile Include="Shapes\TaxonomyShapes.cs" />
     <Compile Include="Shapes\MediaShapes.cs" />
