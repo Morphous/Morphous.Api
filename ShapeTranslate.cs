@@ -30,20 +30,6 @@ namespace Raven.Api.DisplayManagement {
             _requestContext = requestContext;
         }
 
-        public string Display(object shape, BindingAction action) {
-            var viewContext = new ViewContext {
-                HttpContext = _httpContextBase,
-                RequestContext = _requestContext
-            };
-
-            viewContext.RouteData.DataTokens["IWorkContextAccessor"] = _workContextAccessor;
-            var display = _displayHelperFactory.CreateHelper(viewContext, new ViewDataContainer());
-            display.BindingAction = action;
-
-            return ((DisplayHelper)display).ShapeExecute(shape).ToString();
-        }
-
-
         public object Display(Shape shape) {
             return Display((object)shape);
         }
@@ -56,8 +42,7 @@ namespace Raven.Api.DisplayManagement {
 
             viewContext.RouteData.DataTokens["IWorkContextAccessor"] = _workContextAccessor;
             var display = _displayHelperFactory.CreateHelper(viewContext, new ViewDataContainer());
-            display.BindingAction = BindingAction.Translate;
-
+         
             ((DisplayHelper)display).ShapeExecute(shape);
 
             return display.ViewDataContainer.Model.Properties;

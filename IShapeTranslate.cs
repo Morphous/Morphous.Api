@@ -8,7 +8,6 @@ namespace Raven.Api.DisplayManagement {
     public interface IShapeTranslate : IDependency {
         object Display(Shape shape);
         object Display(object shape);
-        string Display(object shape, BindingAction bindingAction);
         IEnumerable<object> Display(IEnumerable<object> shapes);
     }
 }

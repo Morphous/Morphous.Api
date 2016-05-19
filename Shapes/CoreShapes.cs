@@ -51,7 +51,7 @@ namespace Raven.Api.Shapes {
 
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Content(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.Node("Content")) {
 
@@ -81,21 +81,21 @@ namespace Raven.Api.Shapes {
             }
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void ContentZone(dynamic Display, dynamic Shape) {
             foreach (var item in (IEnumerable<dynamic>)Order(Shape)) {
                 Display(item);
             }
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void DocumentZone(dynamic Display, dynamic Shape) {
             foreach (var item in (IEnumerable<dynamic>)Order(Shape)) {
                 Display(item);
             }
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Pager(dynamic Shape, dynamic Display,
             int Page,
             int PageSize,
@@ -126,7 +126,7 @@ namespace Raven.Api.Shapes {
                                 }
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Pager__api__Flat(dynamic Shape, dynamic Display,
             int Page,
             int PageSize,
@@ -171,7 +171,7 @@ namespace Raven.Api.Shapes {
             }
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Common_Metadata(dynamic Display, dynamic Shape) {
             
             using (Display.ViewDataContainer.Model.Node("Metadata"))
@@ -181,12 +181,12 @@ namespace Raven.Api.Shapes {
 
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Common_Metadata_Summary(dynamic Display, dynamic Shape) {
             Parts_Common_Metadata(Display, Shape);
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Common_Metadata__api__Flat(dynamic Display, dynamic Shape)
         {
             System.Web.Mvc.UrlHelper urlHelper = new System.Web.Mvc.UrlHelper(Display.ViewContext.RequestContext);
@@ -197,13 +197,13 @@ namespace Raven.Api.Shapes {
             Display.ViewDataContainer.Model.PublishedUtc = Shape.ContentPart.PublishedUtc;
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Common_Metadata_Summary__api__Flat(dynamic Display, dynamic Shape)
         {
             Parts_Common_Metadata__api__Flat(Display, Shape);
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Title(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
@@ -212,7 +212,7 @@ namespace Raven.Api.Shapes {
             }
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Title_Summary(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
@@ -220,19 +220,19 @@ namespace Raven.Api.Shapes {
             }
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Title__api__Flat(dynamic Display, dynamic Shape)
         {
                 Display.ViewDataContainer.Model.Title = Shape.Title;
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Title_Summary__api__Flat(dynamic Display, dynamic Shape)
         {
             Display.ViewDataContainer.Model.Title = Shape.Title;
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Common_Body(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
@@ -240,7 +240,7 @@ namespace Raven.Api.Shapes {
             }
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Common_Body_Summary(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.Node(Shape.ContentPart))
             {
@@ -248,31 +248,31 @@ namespace Raven.Api.Shapes {
             }
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Common_Body__api__Flat(dynamic Display, dynamic Shape)
         {
             Display.ViewDataContainer.Model.Body = Shape.Html.ToString();
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Common_Body_Summary__api__Flat(dynamic Display, dynamic Shape)
         {
             Display.ViewDataContainer.Model.Body = Shape.Html.ToString();
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Contents_Publish(dynamic Display, dynamic Shape) {
 
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void List(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.Node(Shape.ContentPart ?? "Items")) {
                 List__api__Flat(Display,Shape);
             }
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void List__api__Flat(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.List(Shape.Name ?? "Items")) {
                 foreach (var item in ((IEnumerable<dynamic>)Shape.Items)) {
@@ -281,14 +281,14 @@ namespace Raven.Api.Shapes {
             }
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Container_Contained(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.Node(Shape.ContentPart)) {
                 Parts_Container_Contained__api__Flat(Display, Shape);
             }
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Container_Contained__api__Flat(dynamic Display, dynamic Shape) {
             Shape.List.Name = "ChildItems";
             Display(Shape.List);

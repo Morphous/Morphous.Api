@@ -48,14 +48,14 @@ namespace Raven.Api.Shapes {
 
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Fields_TaxonomyField(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.Node(Shape.ContentPart)) {
                 Fields_TaxonomyField__api__Flat(Display, Shape);
             }
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Fields_TaxonomyField__api__Flat(dynamic Display, dynamic Shape) {
             System.Web.Mvc.UrlHelper urlHelper = new System.Web.Mvc.UrlHelper(Display.ViewContext.RequestContext);
 
@@ -70,12 +70,12 @@ namespace Raven.Api.Shapes {
             }
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_TaxonomyPart(dynamic Display, dynamic Shape) {
             Display(Shape.Taxonomy);
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Taxonomy(dynamic Display, dynamic Shape) {
             Display(Shape.Taxonomy);
 
@@ -84,7 +84,7 @@ namespace Raven.Api.Shapes {
             }
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void TaxonomyItem(dynamic Display, dynamic Shape) {
             using (Display.ViewDataContainer.Model.Node(Shape.ContentPart)) {
 
@@ -105,7 +105,7 @@ namespace Raven.Api.Shapes {
             }
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_TermPart(dynamic Display, dynamic Shape) {
             //this is to ensure the correct wrapping
             Shape.ContentItems.ContentPart = Shape.ContentPart;

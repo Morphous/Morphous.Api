@@ -52,7 +52,7 @@ namespace Raven.Api.Controllers {
                 return new NotFoundWithMessageResult(T("Cannot view content").ToString());
             }
 
-            var model = _contentManager.BuildDisplay(contentItem, displayType);
+            var model = _contentManager.BuildDisplay(contentItem, displayType, bindingType:"Translate");
             var vm = _serializer.Display(model);
 
             return Ok(vm);

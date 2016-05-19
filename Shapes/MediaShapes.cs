@@ -44,7 +44,7 @@ namespace Raven.Shapes.Api {
 
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Media(dynamic Display, dynamic Shape, TextWriter Output) {
             using (Display.ViewDataContainer.Model.Node("Media")) {
                 if (Shape.Meta != null) {
@@ -60,7 +60,7 @@ namespace Raven.Shapes.Api {
         }
 
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Image(dynamic Display, dynamic Shape, TextWriter Output) {
             var mediaPart = Shape.ContentPart.ContentItem.MediaPart;
 
@@ -70,7 +70,7 @@ namespace Raven.Shapes.Api {
             Display.ViewDataContainer.Model.Height = Shape.ContentPart.Height;
         }
 
-        [Shape(BindingAction.Translate)]
+        [Shape(bindingType:"Translate")]
         public void Parts_Image_Summary(dynamic Display, dynamic Shape, TextWriter Output) {
             var mediaPart = Shape.ContentPart.ContentItem.MediaPart;
 
