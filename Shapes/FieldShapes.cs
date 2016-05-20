@@ -15,30 +15,17 @@ using System.Linq;
 
 namespace Raven.Api.Shapes {
     public class FieldShapes : ApiShapesBase, IShapeTableProvider {
-        private readonly Work<WorkContext> _workContext;
-        private readonly Work<IResourceManager> _resourceManager;
-        private readonly Work<IHttpContextAccessor> _httpContextAccessor;
-        private readonly Work<IShapeFactory> _shapeFactory;
         private readonly Work<IContentManager> _contentManager;
 
         public FieldShapes(
-            Work<WorkContext> workContext,
-            Work<IResourceManager> resourceManager,
-            Work<IHttpContextAccessor> httpContextAccessor,
-            Work<IShapeFactory> shapeFactory,
             Work<IContentManager> contentManager
             ) {
-            _workContext = workContext;
-            _resourceManager = resourceManager;
-            _httpContextAccessor = httpContextAccessor;
-            _shapeFactory = shapeFactory;
             _contentManager = contentManager;
 
             T = NullLocalizer.Instance;
         }
 
         public Localizer T { get; set; }
-        public dynamic New { get { return _shapeFactory.Value; } }
         public void Discover(ShapeTableBuilder builder) {
 
         }
