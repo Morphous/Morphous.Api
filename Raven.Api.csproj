@@ -108,12 +108,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiShapesBase.cs" />
+    <Compile Include="BindingTypeAlterationsScope.cs" />
+    <Compile Include="BindingTypeCreateAlterations.cs" />
+    <Compile Include="BindingTypeDisplayAlterations.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Shapes\DesignerToolsShapes.cs" />
     <Compile Include="Filters\CamelCaseControllerAttribute.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="Services\AcceptHeaderAlternatesFactory.cs" />
+    <Compile Include="Shapes\LayoutsShapes.cs" />
     <Compile Include="Shapes\TagsShapes.cs" />
     <Compile Include="Shapes\TaxonomyShapes.cs" />
     <Compile Include="Shapes\MediaShapes.cs" />

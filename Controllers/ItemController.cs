@@ -20,18 +20,25 @@ namespace Raven.Api.Controllers {
 
         private readonly IContentManager _contentManager;
         private readonly IShapeTranslate _serializer;
+        private readonly IBindingTypeCreateAlterations _alterations;
 
         public dynamic Shape { get; set; }
         public IOrchardServices Services { get; private set; }
         public Localizer T { get; set; }
 
-        public ItemController(IContentManager contentManager, IShapeTranslate serializer, IShapeFactory shapeFactory, IOrchardServices services) {
+        public ItemController(
+            IContentManager contentManager, 
+            IShapeTranslate serializer, 
+            IShapeFactory shapeFactory, 
+            IOrchardServices services,
+            IBindingTypeCreateAlterations alterations) {
 
             _contentManager = contentManager;
             _serializer = serializer;
             Shape = shapeFactory;
             Services = services;
             T = NullLocalizer.Instance;
+            _alterations = alterations;
 
         }
 
@@ -52,7 +59,11 @@ namespace Raven.Api.Controllers {
                 return new NotFoundWithMessageResult(T("Cannot view content").ToString());
             }
 
-            var model = _contentManager.BuildDisplay(contentItem, displayType, bindingType:"Translate");
+            dynamic model;
+            using (_alterations.CreateScope("Translate")) {
+                model = _contentManager.BuildDisplay(contentItem, displayType);
+            }
+                
             var vm = _serializer.Display(model);
 
             return Ok(vm);

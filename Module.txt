@@ -8,3 +8,4 @@ Description: Description for the module
 Features:
     Raven.Api:
         Description: Description for feature Raven.Api.
+		Priority: -1
