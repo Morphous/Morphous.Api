@@ -16,12 +16,14 @@ using System.Linq;
 namespace Raven.Api.Shapes {
     public class FieldShapes : ApiShapesBase, IShapeTableProvider {
         private readonly Work<IContentManager> _contentManager;
+        private readonly Work<IBindingTypeCreateAlterations> _alterations;
 
         public FieldShapes(
-            Work<IContentManager> contentManager
+            Work<IContentManager> contentManager,
+            Work<IBindingTypeCreateAlterations> alterations
             ) {
             _contentManager = contentManager;
-
+            _alterations = alterations;
             T = NullLocalizer.Instance;
         }
 
@@ -161,8 +163,10 @@ namespace Raven.Api.Shapes {
             var mediaShapes = new List<dynamic>();
 
             using (Display.ViewDataContainer.Model.List(Shape.ContentField)) {
-                foreach (var item in contents) {
-                    Display(_contentManager.Value.BuildDisplay(item, "Summary",bindingType: "Translate"));
+                using (_alterations.Value.CreateScope("Translate")) {
+                    foreach (var item in contents) {
+                        Display( _contentManager.Value.BuildDisplay(item, "Summary"));
+                    }     
                 }
             }
         }
