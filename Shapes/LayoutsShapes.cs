@@ -39,7 +39,7 @@ namespace Raven.Api.Shapes {
         [Shape(bindingType:"Translate")]
         public void Parts_Layout__api__Flat(dynamic Display, dynamic Shape) {
             using (_alterations.Value.DisplayScope("Display")) {
-                Display.ViewDataContainer.Model.Set("Content",Display(Shape.LayoutRoot).ToString());
+                Display.ViewDataContainer.Model.Set("Content",Display(Shape).ToString());
             }
         }
     }
