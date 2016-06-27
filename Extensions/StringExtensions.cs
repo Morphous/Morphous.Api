@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 
-namespace Raven.Api.Extensions
+namespace Morphous.Api.Extensions
 {
     public static class StringExtensions
     {

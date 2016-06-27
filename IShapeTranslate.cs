@@ -4,7 +4,7 @@ using Orchard;
 using Orchard.DisplayManagement.Descriptors;
 using System.Web;
 
-namespace Raven.Api.DisplayManagement {
+namespace Morphous.Api.DisplayManagement {
     public interface IShapeTranslate : IDependency {
         object Display(Shape shape);
         object Display(object shape);

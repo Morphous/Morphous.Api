@@ -4,7 +4,7 @@ using System.Web.Http.Controllers;
 using System.Net.Http.Formatting;
 using Newtonsoft.Json.Serialization;
 
-namespace Raven.Api {
+namespace Morphous.Api {
     public class CamelCaseControllerAttribute : Attribute, IControllerConfiguration
     {
         public void Initialize(HttpControllerSettings controllerSettings, HttpControllerDescriptor controllerDescriptor)

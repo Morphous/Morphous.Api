@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Raven.Api.Shapes {
+namespace Morphous.Api.Shapes {
     public class FieldShapes : ApiShapesBase, IShapeTableProvider {
         private readonly Work<IContentManager> _contentManager;
         private readonly Work<IBindingTypeCreateAlterations> _alterations;

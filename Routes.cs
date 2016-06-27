@@ -5,13 +5,13 @@ using System.Linq;
 using Orchard.WebApi.Routes;
 using System.Web.Http;
 
-namespace Raven.AsyncShapes
+namespace Morphous.AsyncShapes
 {
 
-    public class RavenApiHttpRouteProvider : IHttpRouteProvider
+    public class MorphousApiHttpRouteProvider : IHttpRouteProvider
     {
 
-        public RavenApiHttpRouteProvider() {
+        public MorphousApiHttpRouteProvider() {
         }
 
         public IEnumerable<RouteDescriptor> GetRoutes() {
@@ -20,10 +20,10 @@ namespace Raven.AsyncShapes
             return new[] {
                 new HttpRouteDescriptor
                 {
-                    Name = "RavenApiItem",
+                    Name = "MorphousApiItem",
                     Priority = 100,
-                    RouteTemplate = "api/raven.api/{controller}/{id}/{displayType}",
-                    Defaults = new { area = "Raven.Api", controller = "item", displayType = "Detail" }
+                    RouteTemplate = "api/Morphous.api/{controller}/{id}/{displayType}",
+                    Defaults = new { area = "Morphous.Api", controller = "item", displayType = "Detail" }
                 }
             };
 

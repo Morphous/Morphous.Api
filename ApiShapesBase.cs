@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Raven.Api {
+namespace Morphous.Api {
     public class ApiShapesBase {
 
         public static IEnumerable<dynamic> Order(dynamic shape) {

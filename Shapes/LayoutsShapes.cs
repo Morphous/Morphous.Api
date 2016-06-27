@@ -15,7 +15,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Linq;
 
-namespace Raven.Api.Shapes {
+namespace Morphous.Api.Shapes {
     public class LayoutsShapes : ApiShapesBase, IDependency {
 
         private readonly Work<IBindingTypeDisplayAlterations> _alterations;

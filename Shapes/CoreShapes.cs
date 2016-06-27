@@ -9,16 +9,16 @@ using Orchard.Localization;
 using Orchard.Mvc;
 using Orchard.Mvc.Html;
 using Orchard.UI.Resources;
-using Raven.Api.Services;
+using Morphous.Api.Services;
 using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Linq;
 using System.Web.Http.Routing;
-using Raven.Api.Extensions;
+using Morphous.Api.Extensions;
 using System.Net.Http;
 
-namespace Raven.Api.Shapes {
+namespace Morphous.Api.Shapes {
     public class CoreShapes : ApiShapesBase, IShapeTableProvider {
         private readonly Work<WorkContext> _workContext;
 

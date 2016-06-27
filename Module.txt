@@ -1,4 +1,4 @@
-﻿Name: Raven.Api
+﻿Name: Morphous.Api
 AntiForgery: enabled
 Author: The Orchard Team
 Website: http://orchardproject.net
@@ -6,6 +6,6 @@ Version: 1.0
 OrchardVersion: 1.0
 Description: Description for the module
 Features:
-    Raven.Api:
-        Description: Description for feature Raven.Api.
+    Morphous.Api:
+        Description: Description for feature Morphous.Api.
 		Priority: -1

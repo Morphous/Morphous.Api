@@ -3,14 +3,14 @@ using Orchard.DisplayManagement;
 using Orchard.DisplayManagement.Descriptors;
 using Orchard.DisplayManagement.Implementation;
 using Orchard.DisplayManagement.Shapes;
-using Raven.Api.ViewModels;
+using Morphous.Api.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Raven.Api.DisplayManagement {
+namespace Morphous.Api.DisplayManagement {
     public class ShapeTranslate : ApiShapesBase, IShapeTranslate {
 
         private readonly IDisplayHelperFactory _displayHelperFactory;

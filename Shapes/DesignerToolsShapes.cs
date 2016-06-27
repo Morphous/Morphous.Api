@@ -11,7 +11,7 @@ using Orchard;
 using Orchard.DisplayManagement.Shapes;
 using System;
 
-namespace Raven.Api.Shapes {
+namespace Morphous.Api.Shapes {
     public class DesignerToolsShapes : ApiShapesBase, IShapeTableProvider {
 
         public DesignerToolsShapes(

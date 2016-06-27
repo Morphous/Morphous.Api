@@ -6,7 +6,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Web;
 
-namespace Raven.Api.ViewModels {
+namespace Morphous.Api.ViewModels {
 
     public class ViewModelNode : Dictionary<string, object> {
         public ViewModelNode() { 

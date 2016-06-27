@@ -14,10 +14,10 @@ using System.Collections.Generic;
 using System.Web;
 
 using System.Linq;
-using Raven.Api.Extensions;
+using Morphous.Api.Extensions;
 using System.Web.Http.Routing;
 
-namespace Raven.Api.Shapes {
+namespace Morphous.Api.Shapes {
     public class TaxonomyShapes : ApiShapesBase, IShapeTableProvider {
 
         public TaxonomyShapes(

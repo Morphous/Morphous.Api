@@ -9,11 +9,11 @@ using Orchard.Mvc;
 using Orchard.UI.Resources;
 using Orchard;
 using Orchard.DisplayManagement.Shapes;
-using Raven.Api;
+using Morphous.Api;
 
 // ReSharper disable InconsistentNaming
 
-namespace Raven.Shapes.Api {
+namespace Morphous.Shapes.Api {
     public class MediaShapes : ApiShapesBase, IShapeTableProvider {
 
         public MediaShapes(
