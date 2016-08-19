@@ -32,15 +32,14 @@ namespace Morphous.Api.Filters {
                 return;
 
             // Some error responses have no content. Create a new empty content object for the OrchardMetaData to be added into.
-            if (actionExecutedContext.Response.Content == null) {
+            if (actionExecutedContext.Response.Content == null)
                 actionExecutedContext.Response.Content = new ObjectContent<Dictionary<string, object>>(new Dictionary<string, object>(), new JsonMediaTypeFormatter());
-            }
 
             Dictionary<string, object> model = null;
             if(actionExecutedContext.Response.TryGetContentValue(out model)) {
                 var orchardMetaData = new OrchardMetaData();
 
-                var messageEntries = notifier.List().ToList();
+                var messageEntries = notifier.List();
                 orchardMetaData.Messages = messageEntries.Select(m => m.Message.ToString()).ToList();
 
                 model.Add("OrchardMetaData", orchardMetaData);
