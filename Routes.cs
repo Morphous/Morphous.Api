@@ -18,15 +18,13 @@ namespace Morphous.AsyncShapes
 
 
             return new[] {
-                new HttpRouteDescriptor
-                {
-                    Name = "MorphousApiItem",
+                new HttpRouteDescriptor {
+                    Name = "MorphousApi",
                     Priority = 100,
-                    RouteTemplate = "api/Morphous.api/{controller}/{id}/{displayType}",
-                    Defaults = new { area = "Morphous.Api", controller = "item", displayType = "Detail" }
+                    RouteTemplate = "api/Contents/{controller}/{id}",
+                    Defaults = new { area = "Morphous.Api", id = RouteParameter.Optional }
                 }
             };
-
         }
 
 
