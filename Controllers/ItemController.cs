@@ -13,11 +13,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Morphous.Api.DisplayManagement;
+using Morphous.Api.Filters;
 
 namespace Morphous.Api.Controllers {
     [CamelCaseController]
+    [NotifyFilter]
     public class ItemController : ApiController {
-
         private readonly IContentManager _contentManager;
         private readonly IShapeTranslate _serializer;
         private readonly IBindingTypeCreateAlterations _alterations;
@@ -30,22 +31,18 @@ namespace Morphous.Api.Controllers {
             IShapeTranslate serializer,
             IOrchardServices services,
             IBindingTypeCreateAlterations alterations) {
-
+            
             _contentManager = contentManager;
             _serializer = serializer;
             Services = services;
             T = NullLocalizer.Instance;
             _alterations = alterations;
-
         }
 
         // /api/Contents/Item/72
         [HttpGet]
-        public IHttpActionResult Display(int? id, string displayType = "Detail") {
-            if (id == null)
-                return NotFound();
-
-            var contentItem = _contentManager.Get(id.Value, VersionOptions.Published);
+        public IHttpActionResult Display(int id, string displayType = "Detail") {
+            var contentItem = _contentManager.Get(id, VersionOptions.Published);
 
             if (contentItem == null)
                 return NotFound();
@@ -63,17 +60,13 @@ namespace Morphous.Api.Controllers {
 
             return Ok(vm);
         }
-
-        // /api/Contents/Item/72
+        
         // /api/Contents/Item/72?version=5
         [HttpGet]
-        public IHttpActionResult Preview(int? id, int version, string displayType = "Detail") {
-            if (id == null)
-                return NotFound();
-
+        public IHttpActionResult Preview(int id, int version, string displayType = "Detail") {
             var versionOptions = VersionOptions.Number((int)version);
             
-            var contentItem = _contentManager.Get(id.Value, versionOptions);
+            var contentItem = _contentManager.Get(id, versionOptions);
             if (contentItem == null)
                 return NotFound();
 
@@ -90,20 +83,5 @@ namespace Morphous.Api.Controllers {
 
             return Ok(vm);
         }
-
-
-        //public class NotFoundWithMessageResult : IHttpActionResult {
-        //    private string message;
-
-        //    public NotFoundWithMessageResult(string message) {
-        //        this.message = message;
-        //    }
-
-        //    public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken) {
-        //        var response = new HttpResponseMessage(HttpStatusCode.NotFound);
-        //        response.Content = new StringContent(message);
-        //        return Task.FromResult(response);
-        //    }
-        //}
     }
 }
