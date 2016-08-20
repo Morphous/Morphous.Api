@@ -5,35 +5,27 @@ using System.Linq;
 using Orchard.WebApi.Routes;
 using System.Web.Http;
 
-namespace Morphous.AsyncShapes
-{
+namespace Morphous.AsyncShapes {
 
-    public class MorphousApiHttpRouteProvider : IHttpRouteProvider
-    {
+    public class MorphousApiHttpRouteProvider : IHttpRouteProvider {
 
         public MorphousApiHttpRouteProvider() {
         }
 
         public IEnumerable<RouteDescriptor> GetRoutes() {
-
-
             return new[] {
-                new HttpRouteDescriptor
-                {
+                new HttpRouteDescriptor {
                     Name = "MorphousApiItem",
                     Priority = 100,
-                    RouteTemplate = "api/Morphous.api/{controller}/{id}/{displayType}",
-                    Defaults = new { area = "Morphous.Api", controller = "item", displayType = "Detail" }
+                    RouteTemplate = "api/Contents/Item/{id}",
+                    Defaults = new { area = "Morphous.Api", controller = "Item" }
                 }
             };
-
         }
-
 
         public void GetRoutes(ICollection<RouteDescriptor> routes) {
             foreach (var routeDescriptor in GetRoutes())
                 routes.Add(routeDescriptor);
         }
     }
-
 }

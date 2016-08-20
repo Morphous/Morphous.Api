@@ -137,6 +137,7 @@
     <Compile Include="BindingTypeDisplayAlterations.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Filters\NotifyFilterAttribute.cs" />
     <Compile Include="Shapes\DesignerToolsShapes.cs" />
     <Compile Include="Filters\CamelCaseControllerAttribute.cs" />
     <Compile Include="Routes.cs" />
