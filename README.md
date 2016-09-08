@@ -40,4 +40,20 @@ Morphous supports alternates which can be specified in the `Accept-Alternates` h
 
 ### Placement
 
-Todo
+Use the `BindingType` attribute in the `<Match>` element to target either JSON or HTML output separately. `"Translate"` targets the JSON output. `"Display"` targets the normal HTML output.
+
+
+```
+<Match BindingType="Translate">
+    <Place Parts_Common_Body="-"/>
+</Match>
+```
+
+
+```
+<Match BindingType="Display">
+    <Place Parts_Title="-"/>
+</Match>
+```
+
+
