@@ -19,7 +19,7 @@ Request a content item by its ID using the following URL scheme and headers. `{a
 
 &nbsp;
 
-  ![Request content item](http://www.sylapse.com/wp-content/uploads/2016/08/github_json_sample.jpg)
+  ![Request content item](http://www.sylapse.com/wp-content/uploads/2016/08/10_get_article2.png)
 
 
 ## Options
