@@ -35,8 +35,8 @@ Add `?version={versionNumber}` query string to the URL to preview a draft conten
 ### Alternates
 
 Morphous supports alternates which can be specified in the `Accept-Alternates` header. The options built into Morphous.Api are:
+- If you don't specify this header then the default format is fairly flat but with some detail about content parts and fields.
 - `flat` - returns content items in a flattened, typical DTO type format.
-- `xflat` - similar to flat but preserves more detail about the original parts and fields.
 
 ### Placement
 
