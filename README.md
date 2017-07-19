@@ -1,7 +1,7 @@
 # Morphous.Api
 Morphous.Api is an Orchard module containing an ApiController that returns Orchard content items as JSON. To use this module you must be using [Morphous.Orchard](https://github.com/Morphous/Morphous.Orchard), our modified fork of Orchard CMS.
 
-For more information and examples, see this [blog post](http://www.sylapse.com/orchard/orchard-cms-for-rest-web-services/).
+For more information and examples, see this [blog post](https://tom-pratt.github.io/morphous-orchardcms-rest-webservice/).
 
 ## Installation (Visual Studio)
 1. Get the [Morphous.Orchard](https://github.com/Morphous/Morphous.Orchard) fork of Orchard CMS and set up an Orchard site with database as normal.
