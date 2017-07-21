@@ -1,0 +1,12 @@
+﻿@model Morphous.Api.Models.ApiRoutePart
+
+<fieldset>
+    @Html.LabelFor(m => m.Name)
+    @Html.TextBoxFor(m => m.Name, new { @class = "text large", autofocus = "autofocus" })
+</fieldset>
+
+<fieldset>
+    @Html.LabelFor(m => m.RouteTemplate)
+    @Html.TextBoxFor(m => m.RouteTemplate, new { @class = "text large", autofocus = "autofocus" })
+</fieldset>
+

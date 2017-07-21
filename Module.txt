@@ -9,3 +9,5 @@ Features:
     Morphous.Api:
         Description: Description for feature Morphous.Api.
 		Priority: -1
+	Morphous.Api.Routes:
+	    Description: Attaches an api route to content

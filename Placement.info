@@ -5,5 +5,7 @@
     Fields_Link-Blog="-"
     Fields_Common_Text-Location="-"
          />-->
-  
+  <Place
+    Parts_ApiRoute_Edit="Content:before"
+    />
 </Placement>
