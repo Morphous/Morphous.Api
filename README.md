@@ -7,11 +7,11 @@ For more information and examples, see this [blog post](https://tom-pratt.github
 1. Get the [Morphous.Orchard](https://github.com/Morphous/Morphous.Orchard) fork of Orchard CMS and set up an Orchard site with database as normal.
 2. Get [Morphous.Api](https://github.com/Morphous/Morphous.Api) and add it to your Orchard modules folder then include in the Visual Studio solution.
 
-  ![Add module](http://i70.photobucket.com/albums/i115/MadBarry_2006/Morphous/add_api_module_zpsys9kqmji.png)
+  ![Add module](https://github.com/tom-pratt/tom-pratt.github.io/blob/master/images/github/add_api_module.png)
 
 3. Enable Morphous API in the modules section of your Orchard site's admin area.
 
-  ![Enable module](http://i70.photobucket.com/albums/i115/MadBarry_2006/Morphous/enable_api_mod_zpsiz2rmwfz.png)
+  ![Enable module](https://github.com/tom-pratt/tom-pratt.github.io/blob/master/images/github/enable_api_mod.png)
 
 
 ## Usage
@@ -19,7 +19,7 @@ Request a content item by its ID using the following URL scheme and headers. `{a
 
 &nbsp;
 
-  ![Request content item](http://i70.photobucket.com/albums/i115/MadBarry_2006/Morphous/10_get_article2_zpsz1cwqqzm.png)
+  ![Request content item](https://github.com/tom-pratt/tom-pratt.github.io/blob/master/images/github/10_get_article2.png)
 
 
 ## Options
