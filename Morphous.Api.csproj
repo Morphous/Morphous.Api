@@ -141,6 +141,14 @@
       <Project>{3787dde5-e5c8-4841-bda7-dcb325388064}</Project>
       <Name>Orchard.Fields</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Orchard.Forms\Orchard.Forms.csproj">
+      <Project>{642a49d7-8752-4177-80d6-bfbbcfad3de0}</Project>
+      <Name>Orchard.Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Projections\Orchard.Projections.csproj">
+      <Project>{5531e894-d259-45a3-aa61-26dbe720c1ce}</Project>
+      <Name>Orchard.Projections</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiShapesBase.cs" />
@@ -153,6 +161,7 @@
     <Compile Include="Handlers\OrchardShellEvents.cs" />
     <Compile Include="Migrations\RoutesMigrations.cs" />
     <Compile Include="Models\ApiRoutePart.cs" />
+    <Compile Include="Projections\ContentTypesFilter.cs" />
     <Compile Include="Shapes\DesignerToolsShapes.cs" />
     <Compile Include="Filters\CamelCaseControllerAttribute.cs" />
     <Compile Include="Routes.cs" />

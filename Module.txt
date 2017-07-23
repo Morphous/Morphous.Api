@@ -8,6 +8,6 @@ Description: Description for the module
 Features:
     Morphous.Api:
         Description: Description for feature Morphous.Api.
-		Priority: -1
+		Priority: 1000
 	Morphous.Api.Routes:
 	    Description: Attaches an api route to content

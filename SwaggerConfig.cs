@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿//adapted from https://github.com/OnefoursevenLabs/Orchard-Swagger/blob/master/SwaggerConfig.cs
+
+using System.Web.Http;
 using Swashbuckle.Application;
 using System.Linq;
 using Autofac;
@@ -29,7 +31,7 @@ namespace Morphous.Api
                         // hold additional metadata for an API. Version and title are required but you can also provide
                         // additional fields by chaining methods off SingleApiVersion.
                         //
-                        c.SingleApiVersion("v1", "Onefourseven.Swagger");
+                        c.SingleApiVersion("v1", "Morphous.ApiRoutes");
 
 
                         // If your API has multiple versions, use "MultipleApiVersions" instead of "SingleApiVersion".
